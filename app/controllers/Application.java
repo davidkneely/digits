@@ -33,6 +33,17 @@ public class Application extends Controller {
   }
 
   /**
+   * Handles the request to delete a contact.
+   * @param id The contact id.
+   */
+  public static Result deleteContact(long id) {
+    ContactFormData data = (id == 0) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(id));
+    ContactDB.deleteContact(data);
+    Form<ContactFormData> formData = Form.form(ContactFormData.class).fill(data);
+    return ok(Index.render(ContactDB.getContacts()));
+  }
+
+  /**
    * Handles request to post form data from the new contacts page.
    * @return The page with the form data that was just posted.
    */

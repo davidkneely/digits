@@ -26,6 +26,18 @@ public class ContactDB {
     contacts.put(idVal, contact);
   }
 
+  // added in delete off of the addContact method
+
+  /**
+   * Deletes a Contact instance from form data and adds it to internal contacts DB.
+   * @param formData The form data.
+   */
+  public static void deleteContact(ContactFormData formData) {
+    long idVal = (formData.id == 0) ? currentId++ : formData.id;
+    Contact contact = new Contact(formData.firstName, formData.lastName, formData.telephone, idVal);
+    contacts.remove(contact);
+  }
+
   /**
    * Returns the contact associated with id, or throws a RuntimeException if not found.
    * @param id The id.
