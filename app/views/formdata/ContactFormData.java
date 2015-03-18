@@ -5,7 +5,6 @@ import play.data.validation.ValidationError;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * The backing class for the contact form data.
  */
