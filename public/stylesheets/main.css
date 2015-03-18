@@ -1,3 +1,7 @@
-body {
-  padding-top: 70px;  /* Move body of page below navbar. */
+
+.mainImage {
+  background-image: url("../images/oculus.jpeg");
+  background-size: cover;
+  background-position: center;
+  height: 200px;
 }
