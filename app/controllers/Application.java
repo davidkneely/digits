@@ -23,8 +23,8 @@ public class Application extends Controller {
 
   /**
    * Handles the request to get the new contact page.
-   * @return The new contact page.
    * @param id The id.
+   * @return The new contact page.
    */
   public static Result newContact(long id) {
     ContactFormData data = (id == 0) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(id));
@@ -48,6 +48,17 @@ public class Application extends Controller {
       System.out.printf("Got data: %s, %s, %s %n", data.firstName, data.lastName, data.telephone);
       return ok(NewContact.render(formData));
     }
+  }
+
+  /**
+   * Handles request to delete contact from in-memory database.
+   *
+   * @param id The id.
+   * @return The Index page.
+   */
+  public static Result deleteContact(long id) {
+    ContactDB.deleteContact(id);
+    return ok(Index.render(ContactDB.getContacts()));
   }
 
 }
