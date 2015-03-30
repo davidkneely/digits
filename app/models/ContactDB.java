@@ -40,10 +40,25 @@ public class ContactDB {
   }
 
   /**
+   * Deletes a contact from the in-memory database with a matching ID value.
+   *
+   * @param id The ID value of the contact to delete.
+   */
+  public static void deleteContact(long id) {
+    Contact contact = contacts.get(id);
+    if (contact == null) {
+      throw new RuntimeException("Could not find the contact with associated id.");
+    }
+    contacts.remove(id);
+  }
+
+  /**
    * Returns the list of contacts.
    * @return The contact list.
    */
   public static List<Contact> getContacts() {
     return new ArrayList<>(contacts.values());
   }
+
+
 }
