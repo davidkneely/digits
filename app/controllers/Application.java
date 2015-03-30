@@ -50,9 +50,6 @@ public class Application extends Controller {
     }
   }
 
-<<<<<<< HEAD
-}
-=======
   /**
    * Handles request to delete contact from in-memory database.
    *
@@ -65,4 +62,3 @@ public class Application extends Controller {
   }
 
 }
->>>>>>> delete-2
