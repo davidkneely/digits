@@ -34,9 +34,9 @@ public class NewContactPage extends FluentPage {
 
   /**
    * Creates new contact to test against.
-   * @param firstName
-   * @param lastName
-   * @param telephone
+   * @param firstName The first name.
+   * @param lastName The last name.
+   * @param telephone The telephone number.
    */
   public void createContact(String firstName, String lastName, String telephone) {
     fill("#firstName").with(firstName);

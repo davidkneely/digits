@@ -34,7 +34,7 @@ public class IntegrationTest {
         assertThat(browser.pageSource()).contains("Current Contacts");
 
         browser.goTo("http://localhost:3333/newcontact");
-        assertThat(browser.pageSource()).contains("Digits");
+        assertThat(browser.pageSource()).contains("Add");
       }
     });
   }
