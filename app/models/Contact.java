@@ -8,7 +8,6 @@ public class Contact {
   private String lastName;
   private String telephone;
   private long id;
-
   private String telephoneType;
 
   /**
