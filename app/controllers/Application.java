@@ -5,8 +5,11 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.formdata.ContactFormData;
+import views.formdata.TelephoneTypes;
 import views.html.Index;
 import views.html.NewContact;
+
+import java.util.Map;
 
 /**
  * Provides controllers for this application.
@@ -29,7 +32,8 @@ public class Application extends Controller {
   public static Result newContact(long id) {
     ContactFormData data = (id == 0) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(id));
     Form<ContactFormData> formData = Form.form(ContactFormData.class).fill(data);
-    return ok(NewContact.render(formData));
+    Map<String, Boolean> telephoneTypeMap = TelephoneTypes.getTypes(data.telephoneType);
+    return ok(NewContact.render(formData, telephoneTypeMap));
   }
 
   /**
@@ -40,13 +44,15 @@ public class Application extends Controller {
     Form<ContactFormData> formData = Form.form(ContactFormData.class).bindFromRequest();
     if (formData.hasErrors()) {
       System.out.println("Errors Found.");
-      return badRequest(NewContact.render(formData));
+      return badRequest(NewContact.render(formData, TelephoneTypes.getTypes()));
     }
     else {
       ContactFormData data = formData.get();
       ContactDB.addContact(data);
-      System.out.printf("Got data: %s, %s, %s %n", data.firstName, data.lastName, data.telephone);
-      return ok(NewContact.render(formData));
+      System.out.printf("Got data: %s, %s, %s %s %n", data.firstName, data.lastName,
+          data.telephone, data.telephoneType);
+
+      return ok(NewContact.render(formData, TelephoneTypes.getTypes(data.telephoneType)));
     }
   }
 
