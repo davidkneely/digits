@@ -23,7 +23,7 @@ public class ContactDB {
   public static void addContact(ContactFormData formData) {
     long idVal = (formData.id == 0) ? currentId++ : formData.id;
     Contact contact = new Contact(formData.firstName, formData.lastName, formData.telephone,
-        idVal, formData.telephoneType);
+        idVal, formData.telephoneType, formData.dietTypes);
     contacts.put(idVal, contact);
   }
 
