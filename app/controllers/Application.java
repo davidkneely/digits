@@ -5,6 +5,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.formdata.ContactFormData;
+import views.formdata.DietTypes;
 import views.formdata.TelephoneTypes;
 import views.html.Index;
 import views.html.NewContact;
@@ -33,7 +34,8 @@ public class Application extends Controller {
     ContactFormData data = (id == 0) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(id));
     Form<ContactFormData> formData = Form.form(ContactFormData.class).fill(data);
     Map<String, Boolean> telephoneTypeMap = TelephoneTypes.getTypes(data.telephoneType);
-    return ok(NewContact.render(formData, telephoneTypeMap));
+    Map<String, Boolean> dietTypeMap = DietTypes.getTypes(data.dietTypes);
+    return ok(NewContact.render(formData, telephoneTypeMap, dietTypeMap));
   }
 
   /**
@@ -44,15 +46,18 @@ public class Application extends Controller {
     Form<ContactFormData> formData = Form.form(ContactFormData.class).bindFromRequest();
     if (formData.hasErrors()) {
       System.out.println("Errors Found.");
-      return badRequest(NewContact.render(formData, TelephoneTypes.getTypes()));
+      Map<String, Boolean> telephoneTypeMap = TelephoneTypes.getTypes();
+      Map<String, Boolean> dietTypeMap = DietTypes.getTypes();
+      return badRequest(NewContact.render(formData, telephoneTypeMap, dietTypeMap));
     }
     else {
       ContactFormData data = formData.get();
       ContactDB.addContact(data);
-      System.out.printf("Got data: %s, %s, %s %s %n", data.firstName, data.lastName,
-          data.telephone, data.telephoneType);
-
-      return ok(NewContact.render(formData, TelephoneTypes.getTypes(data.telephoneType)));
+      System.out.printf("Got data: %s, %s, %s %s %s %n", data.firstName, data.lastName,
+          data.telephone, data.telephoneType, data.dietTypes);
+      Map<String, Boolean> telephoneTypeMap = TelephoneTypes.getTypes(data.telephoneType);
+      Map<String, Boolean> dietTypeMap = DietTypes.getTypes(data.dietTypes);
+      return ok(NewContact.render(formData, telephoneTypeMap, dietTypeMap));
     }
   }
 

@@ -1,4 +1,4 @@
-@(contactForm: Form[views.formdata.ContactFormData], telephoneTypeMap: Map[String, Boolean])
+@(contactForm: Form[views.formdata.ContactFormData], telephoneTypeMap: Map[String, Boolean], dietMap: Map[String, Boolean]))
 
 @import bootstrap3._
 @import helper._
@@ -8,9 +8,7 @@
   @form(routes.Application.postContact(), 'class -> "form-horizontal") {
 
       <!-- Hidden Id-->
-    @hidden(contactForm("id"),
-      placeholder = "Id",
-      help = "")
+    @hidden(contactForm("id"))
 
     <!-- First Name -->
     @text(contactForm("firstName"),
@@ -29,6 +27,11 @@
       contactForm("telephoneType"),
       isMultiple = false,
       optionMap = telephoneTypeMap)
+
+    <!-- Diet Type -->
+    @checkboxes(contactForm("dietTypes"),
+      label="Diet",
+      checkboxMap = dietMap)
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">

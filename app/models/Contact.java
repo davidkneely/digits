@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+
 /**
  * Mock up model for the backend database.
  */
@@ -9,6 +11,7 @@ public class Contact {
   private String telephone;
   private long id;
   private String telephoneType;
+  private ArrayList<String> dietTypes;
 
   /**
    * Creates a contact from a contact instance.
@@ -18,12 +21,13 @@ public class Contact {
    * @param id The id.
    * @param telephoneType The telephone type.
    */
-  public Contact(String firstName, String lastName, String telephone, long id, String telephoneType) {
+  public Contact(String firstName, String lastName, String telephone, long id, String telephoneType, ArrayList<String> dietTypes) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.telephone = telephone;
     this.id = id;
     this.telephoneType = telephoneType;
+    this.dietTypes = dietTypes;
   }
 
   /**
@@ -63,5 +67,9 @@ public class Contact {
    */
   public String getTelephoneType() {
     return telephoneType;
+  }
+
+  public ArrayList<String> getDietTypes() {
+    return dietTypes;
   }
 }

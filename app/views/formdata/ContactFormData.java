@@ -23,6 +23,8 @@ public class ContactFormData {
   /** The telephone type. */
   public String telephoneType;
 
+  public ArrayList<String> dietTypes = new ArrayList<String>();
+
   /**
    * Public no-arg constructor required by play.
    */
@@ -40,6 +42,7 @@ public class ContactFormData {
     this.telephone = contact.getTelephone();
     this.id = contact.getId();
     this.telephoneType = contact.getTelephoneType();
+    this.dietTypes = contact.getDietTypes();
 
   }
 
@@ -50,11 +53,12 @@ public class ContactFormData {
    * @param telephone The telephone.
    * @param telephoneType The telephone type.
    */
-  public ContactFormData(String firstName, String lastName, String telephone, String telephoneType) {
+  public ContactFormData(String firstName, String lastName, String telephone, String telephoneType, ArrayList<String> dietTypes) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.telephone = telephone;
     this.telephoneType = telephoneType;
+    this.dietTypes = dietTypes;
   }
 
   /**
@@ -77,6 +81,15 @@ public class ContactFormData {
     }
     if (!TelephoneTypes.isType(telephoneType)) {
       errors.add(new ValidationError("telephoneType", "Telephone type is invalid."));
+    }
+
+    // Diet Types are optional, but if supplied must exist in database.
+    if (dietTypes.size() > 0) {
+      for (String dietType : dietTypes) {
+        if (DietTypes.findDietTypes(dietType) == null) {
+          errors.add(new ValidationError("dietTypes", "Unknown dietType: " + dietType + "."));
+        }
+      }
     }
 
     return errors.isEmpty() ? null : errors;
