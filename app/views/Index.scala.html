@@ -10,8 +10,8 @@
           <td>@contact.getFirstName()</td>
           <td>@contact.getLastName()</td>
           <td>@contact.getTelephone()</td>
-          <td>@contact.getTelephoneType()</td>
-          <td>@contact.getDietTypes()</td>
+          <td>@contact.getTelephoneType().getTelephoneType()</td>
+          <td>@contact.getDietTypeString()</td>
           <td><a class="btn btn-default" href="@routes.Application.newContact(contact.getId())" role="button">Edit</a></td>
           <td><a class="btn btn-default" href="@routes.Application.deleteContact(contact.getId())" role="button">Delete</a></td>
         </tr>

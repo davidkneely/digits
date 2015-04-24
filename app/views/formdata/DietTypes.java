@@ -60,7 +60,7 @@ public class DietTypes {
    */
   public static Map<String, Boolean> getTypes(List<String> types) {
     Map<String, Boolean> typeMap = getTypes();
-    for(String type : types){
+    for (String type : types) {
       if (isType(type)) {
         typeMap.put(type, true);
       }
