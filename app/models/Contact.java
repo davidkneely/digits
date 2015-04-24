@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Mock up model for the backend database.
@@ -10,8 +11,56 @@ public class Contact {
   private String lastName;
   private String telephone;
   private long id;
-  private String telephoneType;
-  private ArrayList<String> dietTypes;
+  private TelephoneType telephoneType;
+  private List<DietType> dietTypes;
+
+  /**
+   * Sets the first name.
+   * @param firstName The first name.
+   */
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  /**
+   * Sets the last name.
+   * @param lastName The last name.
+   */
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  /**
+   * Sets the telephone.
+   * @param telephone The telephone.
+   */
+  public void setTelephone(String telephone) {
+    this.telephone = telephone;
+  }
+
+  /**
+   * Sets the id.
+   * @param id The id.
+   */
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  /**
+   * Sets the telephone type.
+   * @param telephoneType The telephone type.
+   */
+  public void setTelephoneType(TelephoneType telephoneType) {
+    this.telephoneType = telephoneType;
+  }
+
+  /**
+   * Sets the diet type.
+   * @param dietTypes The diet type.
+   */
+  public void setDietTypes(ArrayList<DietType> dietTypes) {
+    this.dietTypes = dietTypes;
+  }
 
   /**
    * Creates a contact from a contact instance.
@@ -23,7 +72,7 @@ public class Contact {
    * @param dietTypes The diet type.
    */
   public Contact(String firstName, String lastName, String telephone, long id,
-                 String telephoneType, ArrayList<String> dietTypes) {
+                 TelephoneType telephoneType, List<DietType> dietTypes) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.telephone = telephone;
@@ -67,7 +116,7 @@ public class Contact {
    * Returns the telephone type.
    * @return The telephone type.
    */
-  public String getTelephoneType() {
+  public TelephoneType getTelephoneType() {
     return telephoneType;
   }
 
@@ -75,7 +124,31 @@ public class Contact {
    * Gets the diet type.
    * @return The diet type.
    */
-  public ArrayList<String> getDietTypes() {
+  public List<DietType> getDietTypes() {
     return dietTypes;
+  }
+
+  /**
+   * Returns a single string of comma delimited diet types.
+   * @return The diet types as a string.
+   */
+  public String getDietTypeString() {
+    String diets = "";
+    for (DietType diet : dietTypes) {
+      diets += diet.getDietType() + ", ";
+    }
+    return diets.substring(0, (diets.length() == 0 ? 0 : (diets.length() - 1)));
+  }
+
+  /**
+   * Returns a list of diet type strings.
+   * @return The list of diet type strings for this contact.
+   */
+  public List<String> getDietTypesList() {
+    List<String> dietList = new ArrayList<>();
+    for (DietType dietType : this.dietTypes) {
+      dietList.add(dietType.getDietType());
+    }
+    return dietList;
   }
 }

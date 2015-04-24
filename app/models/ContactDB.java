@@ -1,7 +1,6 @@
 package models;
 
 import views.formdata.ContactFormData;
-import views.formdata.TelephoneTypes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,8 +24,14 @@ public class ContactDB {
    */
   public static void addContact(ContactFormData formData) {
     long idVal = (formData.id == 0) ? currentId++ : formData.id;
+
+    TelephoneType telephoneType = getTelephoneType(formData.telephoneType);
+    List<DietType> dietTypes = new ArrayList<>();
+    for (String dietString : formData.dietTypes) {
+      dietTypes.add(getDietType(dietString));
+    }
     Contact contact = new Contact(formData.firstName, formData.lastName, formData.telephone,
-        idVal, formData.telephoneType, formData.dietTypes);
+        idVal, telephoneType, dietTypes);
     contacts.put(idVal, contact);
   }
 
@@ -51,7 +56,7 @@ public class ContactDB {
    * @param typeString The telephone type.
    * @return The telephone instance if found.
    */
-  public TelephoneType getTelephoneType(String typeString) {
+  public static TelephoneType getTelephoneType(String typeString) {
     TelephoneType telephoneType = telephoneTypes.get(typeString);
     if (telephoneType == null) {
       throw new RuntimeException("Illegal telephone type " + typeString);
@@ -64,7 +69,7 @@ public class ContactDB {
    * @param typeString The diet type.
    * @return The diet type instance if found.
    */
-  public DietType getDietType(String typeString) {
+  public static DietType getDietType(String typeString) {
     DietType dietType = dietTypes.get(typeString);
     if (dietType == null) {
       throw new RuntimeException("Illegal diet type " + typeString);

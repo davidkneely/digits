@@ -26,7 +26,7 @@ public class ContactFormData {
   /**
    * Creates list of diet types.
    */
-  public ArrayList<String> dietTypes = new ArrayList<String>();
+  public List<String> dietTypes = new ArrayList<String>();
 
   /**
    * Public no-arg constructor required by play.
@@ -44,8 +44,8 @@ public class ContactFormData {
     this.lastName = contact.getLastName();
     this.telephone = contact.getTelephone();
     this.id = contact.getId();
-    this.telephoneType = contact.getTelephoneType();
-    this.dietTypes = contact.getDietTypes();
+    this.telephoneType = contact.getTelephoneType().getTelephoneType();
+    this.dietTypes = contact.getDietTypesList();
 
   }
 
