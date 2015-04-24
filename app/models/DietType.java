@@ -31,7 +31,7 @@ public class DietType {
    * Gets the diet type.
    * @return The diet type.
    */
-  public String setDietType() {
+  public String getDietType() {
     return dietType;
   }
 
