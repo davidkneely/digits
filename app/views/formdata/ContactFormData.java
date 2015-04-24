@@ -23,6 +23,9 @@ public class ContactFormData {
   /** The telephone type. */
   public String telephoneType;
 
+  /**
+   * Creates list of diet types.
+   */
   public ArrayList<String> dietTypes = new ArrayList<String>();
 
   /**
@@ -52,8 +55,10 @@ public class ContactFormData {
    * @param lastName The last name.
    * @param telephone The telephone.
    * @param telephoneType The telephone type.
+   * @param dietTypes The diet type.
    */
-  public ContactFormData(String firstName, String lastName, String telephone, String telephoneType, ArrayList<String> dietTypes) {
+  public ContactFormData(String firstName, String lastName, String telephone,
+                         String telephoneType, ArrayList<String> dietTypes) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.telephone = telephone;

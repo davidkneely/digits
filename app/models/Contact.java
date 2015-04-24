@@ -20,8 +20,10 @@ public class Contact {
    * @param telephone The telephone.
    * @param id The id.
    * @param telephoneType The telephone type.
+   * @param dietTypes The diet type.
    */
-  public Contact(String firstName, String lastName, String telephone, long id, String telephoneType, ArrayList<String> dietTypes) {
+  public Contact(String firstName, String lastName, String telephone, long id,
+                 String telephoneType, ArrayList<String> dietTypes) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.telephone = telephone;
@@ -69,6 +71,10 @@ public class Contact {
     return telephoneType;
   }
 
+  /**
+   * Gets the diet type.
+   * @return The diet type.
+   */
   public ArrayList<String> getDietTypes() {
     return dietTypes;
   }
