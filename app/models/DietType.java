@@ -1,15 +1,31 @@
 package models;
 
+import play.db.ebean.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Creates DietType to hold the diet types.
  */
-public class DietType {
+@Entity
+public class DietType extends Model {
+  @Id
   private long id;
   private String dietType;
+  @ManyToMany(mappedBy = "dietTypes")
   List<Contact> contacts = new ArrayList<>();
+
+  /**
+   * The EBean ORM finder method for database queries.
+   * @return The finder method.
+   */
+  public static Finder<Long, DietType> find() {
+    return new Finder<Long, DietType>(Long.class, DietType.class);
+  }
 
   /**
    * Gets the id.
