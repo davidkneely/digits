@@ -1,17 +1,27 @@
 package models;
 
+import play.db.ebean.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Mock up model for the backend database.
  */
-public class Contact {
+@Entity
+public class Contact extends Model {
   private String firstName;
   private String lastName;
   private String telephone;
+  @Id
   private long id;
+  @ManyToOne
   private TelephoneType telephoneType;
+  @ManyToMany
   private List<DietType> dietTypes;
 
   /**
@@ -79,6 +89,14 @@ public class Contact {
     this.id = id;
     this.telephoneType = telephoneType;
     this.dietTypes = dietTypes;
+  }
+
+  /**
+   * The EBean ORM finder method for database queries.
+   * @return The finder method.
+   */
+  public static Finder<Long, Contact> find() {
+    return new Finder<Long, Contact>(Long.class, Contact.class);
   }
 
   /**
