@@ -1,15 +1,31 @@
 package models;
 
+import play.db.ebean.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Creates TelephoneType to hold the type of telephone.
  */
-public class TelephoneType {
+@Entity
+public class TelephoneType extends Model {
+  @Id
   private long id;
   private String telephoneType;
+  @OneToMany(mappedBy = "telephoneType")
   List<Contact> contacts = new ArrayList<>();
+
+  /**
+   * The EBean ORM finder method for database queries.
+   * @return The finder method.
+   */
+  public static Finder<Long, TelephoneType> find() {
+    return new Finder<Long, TelephoneType>(Long.class, TelephoneType.class);
+  }
 
   /**
    * Gets the id.

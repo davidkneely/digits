@@ -2,6 +2,7 @@ package models;
 
 import play.db.ebean.Model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -19,9 +20,9 @@ public class Contact extends Model {
   private String telephone;
   @Id
   private long id;
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.PERSIST)
   private TelephoneType telephoneType;
-  @ManyToMany
+  @ManyToMany(cascade = CascadeType.PERSIST)
   private List<DietType> dietTypes;
 
   /**
@@ -68,7 +69,7 @@ public class Contact extends Model {
    * Sets the diet type.
    * @param dietTypes The diet type.
    */
-  public void setDietTypes(ArrayList<DietType> dietTypes) {
+  public void setDietTypes(List<DietType> dietTypes) {
     this.dietTypes = dietTypes;
   }
 
@@ -77,16 +78,14 @@ public class Contact extends Model {
    * @param firstName The first name.
    * @param lastName The last name.
    * @param telephone The telephone.
-   * @param id The id.
    * @param telephoneType The telephone type.
    * @param dietTypes The diet type.
    */
-  public Contact(String firstName, String lastName, String telephone, long id,
+  public Contact(String firstName, String lastName, String telephone,
                  TelephoneType telephoneType, List<DietType> dietTypes) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.telephone = telephone;
-    this.id = id;
     this.telephoneType = telephoneType;
     this.dietTypes = dietTypes;
   }
