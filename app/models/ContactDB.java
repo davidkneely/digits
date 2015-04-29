@@ -67,6 +67,7 @@ public class ContactDB {
     for (DietType dietType : dietTypes) {
       dietType.addContact(contact);
     }
+
     contact.save();
   }
 

@@ -98,6 +98,8 @@ public class ContactFormData {
       errors.add(new ValidationError("telephoneType", "Telephone type is invalid."));
     }
 
+    //TODO: Add in image validation.
+
     // Diet Types are optional, but if supplied must exist in database.
     if (dietTypes.size() > 0) {
       for (String dietType : dietTypes) {
