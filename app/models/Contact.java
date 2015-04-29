@@ -116,14 +116,18 @@ public class Contact extends Model {
    * @param telephone The telephone.
    * @param telephoneType The telephone type.
    * @param dietTypes The diet type.
+   * @param data The image data.
+   * @param imageName The image name.
    */
   public Contact(String firstName, String lastName, String telephone,
-                 TelephoneType telephoneType, List<DietType> dietTypes) {
+                 TelephoneType telephoneType, List<DietType> dietTypes, byte[] data, String imageName) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.telephone = telephone;
     this.telephoneType = telephoneType;
     this.dietTypes = dietTypes;
+    this.data = data;
+    this.imageName = imageName;
   }
 
   /**

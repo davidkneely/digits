@@ -53,12 +53,14 @@ public class ContactDB {
     }
 
     Contact contact = (formData.id == 0) ? new Contact(formData.firstName, formData.lastName, formData.telephone,
-        telephoneType, dietTypes) : Contact.find().byId(formData.id);
+        telephoneType, dietTypes, formData.data, formData.imageName) : Contact.find().byId(formData.id);
     contact.setFirstName(formData.firstName);
     contact.setLastName(formData.lastName);
     contact.setTelephone(formData.telephone);
     contact.setTelephoneType(telephoneType);
     contact.setDietTypes(dietTypes);
+    contact.setData(formData.data);
+    contact.setImageName(formData.imageName);
 
     // Make relationships bi-directional.
     telephoneType.addContact(contact);

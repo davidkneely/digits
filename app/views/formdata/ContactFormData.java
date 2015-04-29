@@ -22,6 +22,10 @@ public class ContactFormData {
   public long id;
   /** The telephone type. */
   public String telephoneType;
+  /** The image data. */
+  public byte[] data;
+  /** The image name. */
+  public String imageName;
 
   /**
    * Creates list of diet types.
@@ -46,6 +50,8 @@ public class ContactFormData {
     this.id = contact.getId();
     this.telephoneType = contact.getTelephoneType().getTelephoneType();
     this.dietTypes = contact.getDietTypesList();
+    this.data = contact.getData();
+    this.imageName = contact.getImageName();
 
   }
 
@@ -56,14 +62,18 @@ public class ContactFormData {
    * @param telephone The telephone.
    * @param telephoneType The telephone type.
    * @param dietTypes The diet type.
+   * @param data The image data.
+   * @param imageName The image name.
    */
   public ContactFormData(String firstName, String lastName, String telephone,
-                         String telephoneType, ArrayList<String> dietTypes) {
+                         String telephoneType, ArrayList<String> dietTypes, byte[] data, String imageName) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.telephone = telephone;
     this.telephoneType = telephoneType;
     this.dietTypes = dietTypes;
+    this.data = data;
+    this.imageName = imageName;
   }
 
   /**
