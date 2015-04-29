@@ -61,6 +61,7 @@ public class ContactDB {
     contact.setDietTypes(dietTypes);
     contact.setData(formData.data);
     contact.setImageName(formData.imageName);
+    contact.setImageName("testImageName.png");
 
     // Make relationships bi-directional.
     telephoneType.addContact(contact);
