@@ -5,6 +5,7 @@ import play.db.ebean.Model;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import java.util.ArrayList;
@@ -24,6 +25,9 @@ public class Contact extends Model {
   private TelephoneType telephoneType;
   @ManyToMany(cascade = CascadeType.PERSIST)
   private List<DietType> dietTypes;
+  @Lob
+  private byte[] data;
+  private String imageName;
 
   /**
    * Sets the first name.
