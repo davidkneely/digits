@@ -30,6 +30,38 @@ public class Contact extends Model {
   private String imageName;
 
   /**
+   * Gets image data.
+   * @return The image data.
+   */
+  public byte[] getData() {
+    return data;
+  }
+
+  /**
+   * Sets the image data.
+   * @param data The image data.
+   */
+  public void setData(byte[] data) {
+    this.data = data;
+  }
+
+  /**
+   * Gets the image name.
+   * @return The image name.
+   */
+  public String getImageName() {
+    return imageName;
+  }
+
+  /**
+   * Sets the image name.
+   * @param imageName The image name.
+   */
+  public void setImageName(String imageName) {
+    this.imageName = imageName;
+  }
+
+  /**
    * Sets the first name.
    * @param firstName The first name.
    */
