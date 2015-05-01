@@ -1,16 +1,19 @@
 package controllers;
 
 import models.ContactDB;
-import models.Image;
 import play.data.Form;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import views.formdata.ContactFormData;
 import views.formdata.DietTypes;
 import views.formdata.TelephoneTypes;
 import views.html.Index;
 import views.html.NewContact;
+import play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
 
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -38,7 +41,7 @@ public class Application extends Controller {
     Form<ContactFormData> formData = Form.form(ContactFormData.class).fill(data);
     Map<String, Boolean> telephoneTypeMap = TelephoneTypes.getTypes(data.telephoneType);
     Map<String, Boolean> dietTypeMap = DietTypes.getTypes(data.dietTypes);
-    Image image = new Image(formData.get().imageName, formData.get().data);
+    System.out.println(formData.get().imageName);
     return ok(NewContact.render(formData, telephoneTypeMap, dietTypeMap));
   }
 
@@ -56,6 +59,18 @@ public class Application extends Controller {
       return badRequest(NewContact.render(formData, telephoneTypeMap, dietTypeMap));
     }
     else {
+
+      MultipartFormData body = request().body().asMultipartFormData();
+      FilePart picture = body.getFile("image");
+      if (picture != null) {
+        String fileName = picture.getFilename();
+        String contentType = picture.getContentType();
+        File file = picture.getFile();
+        System.out.printf("Got image: %s %n", fileName);
+      } else {
+        System.out.printf("Error getting image");
+      }
+
       ContactFormData data = formData.get();
       ContactDB.addContact(data);
       System.out.printf("Got data: %s, %s, %s %s %s %n", data.firstName, data.lastName,

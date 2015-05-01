@@ -5,7 +5,7 @@
 
 @Main("NewContact") {
   <div class="container">
-  @form(routes.Application.postContact(), 'class -> "form-horizontal") {
+  @form(action = routes.Application.postContact(), 'class -> "form-horizontal", 'enctype -> "multipart/form-data") {
 
       <!-- Hidden Id-->
     @hidden(contactForm("id"))
