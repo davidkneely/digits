@@ -1,6 +1,7 @@
 package controllers;
 
 import models.ContactDB;
+import models.Image;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -19,6 +20,7 @@ public class Application extends Controller {
 
   /**
    * Returns the home page.
+   *
    * @return The resulting home page.
    */
   public static Result index() {
@@ -27,6 +29,7 @@ public class Application extends Controller {
 
   /**
    * Handles the request to get the new contact page.
+   *
    * @param id The id.
    * @return The new contact page.
    */
@@ -35,11 +38,13 @@ public class Application extends Controller {
     Form<ContactFormData> formData = Form.form(ContactFormData.class).fill(data);
     Map<String, Boolean> telephoneTypeMap = TelephoneTypes.getTypes(data.telephoneType);
     Map<String, Boolean> dietTypeMap = DietTypes.getTypes(data.dietTypes);
+    Image image = new Image(formData.get().imageName, formData.get().data);
     return ok(NewContact.render(formData, telephoneTypeMap, dietTypeMap));
   }
 
   /**
    * Handles request to post form data from the new contacts page.
+   *
    * @return The page with the form data that was just posted.
    */
   public static Result postContact() {
