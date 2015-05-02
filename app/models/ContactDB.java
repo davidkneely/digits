@@ -20,30 +20,6 @@ public class ContactDB {
    * If form ID was zero, create an ID for this new contact before saving. Otherwise update the pre-existing entry.
    * @param formData The form data.
    */
-//  public static void addContact(ContactFormData formData) {
-//
-//    TelephoneType telephoneType = getTelephoneType(formData.telephoneType);
-//    List<DietType> dietTypes = new ArrayList<>();
-//    for (String dietString : formData.dietTypes) {
-//      dietTypes.add(getDietType(dietString));
-//    }
-//    Contact contact = new Contact(formData.firstName, formData.lastName, formData.telephone,
-//        telephoneType, dietTypes);
-//
-//    // Make relationships bi-directional.
-//    telephoneType.addContact(contact);
-//    for (DietType dietType : dietTypes) {
-//      dietType.addContact(contact);
-//    }
-//
-//    contact.save();
-//  }
-
-  /**
-   * Creates a Contact instance from form data and adds it to internal contacts DB.
-   * If form ID was zero, create an ID for this new contact before saving. Otherwise update the pre-existing entry.
-   * @param formData The form data.
-   */
   public static void addContact(ContactFormData formData) {
 
     TelephoneType telephoneType = getTelephoneType(formData.telephoneType);
@@ -61,7 +37,6 @@ public class ContactDB {
     contact.setDietTypes(dietTypes);
     contact.setData(formData.data);
     contact.setImageName(formData.imageName);
-    contact.setImageName("testImageName.png");
 
     // Make relationships bi-directional.
     telephoneType.addContact(contact);

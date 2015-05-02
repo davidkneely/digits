@@ -1,6 +1,7 @@
 package controllers;
 
 import models.ContactDB;
+import models.Image;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -13,7 +14,11 @@ import views.html.NewContact;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
 /**
@@ -45,6 +50,8 @@ public class Application extends Controller {
     return ok(NewContact.render(formData, telephoneTypeMap, dietTypeMap));
   }
 
+
+
   /**
    * Handles request to post form data from the new contacts page.
    *
@@ -60,23 +67,48 @@ public class Application extends Controller {
     }
     else {
 
+      /* Retrieves image from form */
+
       MultipartFormData body = request().body().asMultipartFormData();
       FilePart picture = body.getFile("image");
+      String fileName = "";
+      String contentType = "";
+      File file = null;
       if (picture != null) {
-        String fileName = picture.getFilename();
-        String contentType = picture.getContentType();
-        File file = picture.getFile();
-        System.out.printf("Got image: %s %n", fileName);
+        fileName = picture.getFilename();
+        contentType = picture.getContentType();
+        file = picture.getFile();
       } else {
         System.out.printf("Error getting image");
       }
 
+      /* Writes the image data into an inputStream */
+      byte[] imageData = new byte[(int)file.length()];
+      InputStream inStream = null;
+      try {
+        inStream = new BufferedInputStream(new FileInputStream(file));
+        inStream.read(imageData);
+      } catch (IOException e) {
+        e.printStackTrace();
+      } finally {
+        if (inStream != null) {
+          try {
+            inStream.close();
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+
       ContactFormData data = formData.get();
+      data.imageName = fileName;
+      data.data = imageData;
       ContactDB.addContact(data);
-      System.out.printf("Got data: %s, %s, %s %s %s %n", data.firstName, data.lastName,
-          data.telephone, data.telephoneType, data.dietTypes);
+      System.out.printf("Got data: %s, %s, %s %s %s %s %s %n", data.firstName, data.lastName,
+          data.telephone, data.telephoneType, data.dietTypes, data.imageName, data.data);
       Map<String, Boolean> telephoneTypeMap = TelephoneTypes.getTypes(data.telephoneType);
       Map<String, Boolean> dietTypeMap = DietTypes.getTypes(data.dietTypes);
+
       return ok(NewContact.render(formData, telephoneTypeMap, dietTypeMap));
     }
   }
