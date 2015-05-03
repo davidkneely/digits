@@ -4,7 +4,7 @@
   <div class="container">
     <h1>Current Contacts</h1>
     <table class="table table-striped">
-      <tr><th>First</th><th><strong>Last</th><th>Phone</th><th>TelephoneType</th><th>DietType</th></tr>
+      <tr><th>First</th><th><strong>Last</th><th>Phone</th><th>TelephoneType</th><th>DietType</th><th>Image</th></tr>
       @for(contact <- contacts) {
         <tr>
           <td>@contact.getFirstName()</td>
@@ -12,6 +12,7 @@
           <td>@contact.getTelephone()</td>
           <td>@contact.getTelephoneType().getTelephoneType()</td>
           <td>@contact.getDietTypeString()</td>
+          <td>IMAGE</td>
           <td><a class="btn btn-default" href="@routes.Application.newContact(contact.getId())" role="button">Edit</a></td>
           <td><a class="btn btn-default" href="@routes.Application.deleteContact(contact.getId())" role="button">Delete</a></td>
         </tr>
