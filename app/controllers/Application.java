@@ -60,13 +60,6 @@ public class Application extends Controller {
     }
     else {
 
-
-
-
-
-
-
-
       /* Retrieves image from form */
 
       MultipartFormData body = request().body().asMultipartFormData();
@@ -83,12 +76,13 @@ public class Application extends Controller {
       }
 
       Image image = new Image(fileName, file);
+      long imageId = image.id;
 
       ContactFormData data = formData.get();
       ContactDB.addContact(data);
 
-      System.out.printf("Got data: %s, %s, %s %s %s %n", data.firstName, data.lastName,
-          data.telephone, data.telephoneType, data.dietTypes);
+      System.out.printf("Got data: %s, %s, %s %s %s %s %n", data.firstName, data.lastName,
+          data.telephone, data.telephoneType, data.dietTypes, imageId);
       Map<String, Boolean> telephoneTypeMap = TelephoneTypes.getTypes(data.telephoneType);
       Map<String, Boolean> dietTypeMap = DietTypes.getTypes(data.dietTypes);
       return ok(NewContact.render(formData, telephoneTypeMap, dietTypeMap));
@@ -109,41 +103,6 @@ public class Application extends Controller {
       return redirect(routes.Application.index());
     }
   }
-
-//  public static Result uploadImage() {
-//    Form<UploadImageForm> form = form(UploadImageForm.class).bindFromRequest();
-//
-//    if (form.hasErrors()) {
-//      return badRequest(index.render(
-//          form,
-//          Image.find.all()
-//      ));
-//
-//    } else {
-//      new Image(
-//          form.get().image.getFilename(),
-//          form.get().image.getFile()
-//      );
-//
-//      flash("success", "File uploaded.");
-//      return redirect(routes.Application.index());
-//    }
-//  }
-//
-//  public static class UploadImageForm {
-//    public Http.MultipartFormData.FilePart image;
-//
-//    public String validate() {
-//      Http.MultipartFormData data = request().body().asMultipartFormData();
-//      image = data.getFile("image");
-//
-//      if (image == null) {
-//        return "File is missing.";
-//      }
-//
-//      return null;
-//    }
-//  }
 
   /**
    * Handles request to delete contact from in-memory database.

@@ -53,7 +53,7 @@ public class ContactDB {
     }
 
     Contact contact = (formData.id == 0) ? new Contact(formData.firstName, formData.lastName, formData.telephone,
-        telephoneType, dietTypes) : Contact.find().byId(formData.id);
+        telephoneType, dietTypes, formData.imageId) : Contact.find().byId(formData.id);
     contact.setFirstName(formData.firstName);
     contact.setLastName(formData.lastName);
     contact.setTelephone(formData.telephone);

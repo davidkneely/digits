@@ -22,6 +22,8 @@ public class ContactFormData {
   public long id;
   /** The telephone type. */
   public String telephoneType;
+  /** The image id **/
+  public long imageId;
 
   /**
    * Creates list of diet types.
@@ -46,6 +48,7 @@ public class ContactFormData {
     this.id = contact.getId();
     this.telephoneType = contact.getTelephoneType().getTelephoneType();
     this.dietTypes = contact.getDietTypesList();
+    this.imageId = contact.getImageId();
 
   }
 

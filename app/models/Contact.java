@@ -24,22 +24,22 @@ public class Contact extends Model {
   private TelephoneType telephoneType;
   @ManyToMany(cascade = CascadeType.PERSIST)
   private List<DietType> dietTypes;
-  private Image image;
+  private long imageId;
 
   /**
-   * Gets the image.
-   * @return The image.
+   * Get the image id.
+   * @return The image id.
    */
-  public Image getImage() {
-    return image;
+  public long getImageId() {
+    return imageId;
   }
 
   /**
-   * Sets the image.
-   * @param image The image.
+   * Sets the image id.
+   * @param imageId The image id.
    */
-  public void setImage(Image image) {
-    this.image = image;
+  public void setImageId(long imageId) {
+    this.imageId = imageId;
   }
 
   /**
@@ -99,12 +99,13 @@ public class Contact extends Model {
    * @param dietTypes The diet type.
    */
   public Contact(String firstName, String lastName, String telephone,
-                 TelephoneType telephoneType, List<DietType> dietTypes) {
+                 TelephoneType telephoneType, List<DietType> dietTypes, long imageId) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.telephone = telephone;
     this.telephoneType = telephoneType;
     this.dietTypes = dietTypes;
+    this.imageId = imageId;
   }
 
   /**
