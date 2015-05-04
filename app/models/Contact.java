@@ -24,6 +24,23 @@ public class Contact extends Model {
   private TelephoneType telephoneType;
   @ManyToMany(cascade = CascadeType.PERSIST)
   private List<DietType> dietTypes;
+  private Image image;
+
+  /**
+   * Gets the image.
+   * @return The image.
+   */
+  public Image getImage() {
+    return image;
+  }
+
+  /**
+   * Sets the image.
+   * @param image The image.
+   */
+  public void setImage(Image image) {
+    this.image = image;
+  }
 
   /**
    * Sets the first name.
